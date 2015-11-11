@@ -57,11 +57,13 @@ class openvpn::server (
     mode    => '0600',
     content => template('openvpn/server.conf.erb'),
   }
+  
+  $_dh_file = basename($dh)
 
   exec { "create ${dh}":
     cwd     => $openvpn_dir,
     command => "${openssl} dhparam -out ${dh} 2048",
-    creates => "${openvpn_dir}/${dh}",
+    creates => "${openvpn_dir}/${_dh_file}",
   }
 
   if $tls_auth {
