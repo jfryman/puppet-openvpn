@@ -19,6 +19,10 @@ ifconfig-pool-persist ipp.txt
 mode server
 <% end -%>
 
+<% if @ta -%>
+tls-auth <%= @ta %> 0 # This file is secret
+<% end -%>
+
 # IPv6 Server
 <% if @server_ipv6 -%>
 server-ipv6 <%= @server_ipv6 %>
